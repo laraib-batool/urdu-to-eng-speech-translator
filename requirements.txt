@@ -3,3 +3,4 @@ streamlit-webrtc
 SpeechRecognition
 deep-translator==1.11.4
 numpy
+av
