@@ -7,7 +7,6 @@ import wave
 import numpy as np
 from queue import Queue
 
-# Page setup
 st.set_page_config(
     page_title="Urdu to English Speech Translator",
     page_icon="🎤",
@@ -17,7 +16,6 @@ st.set_page_config(
 st.title("🎤 Urdu → English Speech Translator")
 st.write("🎙 Speak in **Urdu**, and I'll translate it into **English** for you!")
 
-# Queue to pass results from background thread to main thread
 result_queue = Queue()
 
 class AudioProcessor(AudioProcessorBase):
@@ -45,7 +43,6 @@ class AudioProcessor(AudioProcessorBase):
 
         return frame
 
-# WebRTC streamer
 webrtc_streamer(
     key="speech-translator",
     mode=WebRtcMode.SENDONLY,
@@ -56,7 +53,6 @@ webrtc_streamer(
     }
 )
 
-# Display results from queue
 if not result_queue.empty():
     result = result_queue.get()
     if "error" in result:
@@ -64,8 +60,5 @@ if not result_queue.empty():
     else:
         st.success(f"**You said (Urdu):** {result['urdu']}")
         st.info(f"**English Translation:** {result['english']}")
-
-st.caption("📱 Works on mobile & desktop browsers — no extra software needed.")
-)
 
 st.caption("📱 Works on mobile & desktop browsers — no extra software needed.")
